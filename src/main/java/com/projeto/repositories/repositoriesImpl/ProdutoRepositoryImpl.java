@@ -13,8 +13,8 @@ import javax.persistence.EntityNotFoundException;
 @Transactional(readOnly = true)
 public class ProdutoRepositoryImpl extends SimpleJpaRepository<Produto, Long> implements ProdutoRepository {
 
-    public ProdutoRepositoryImpl(EntityManager em) {
-        super(Produto.class, em);
+    public ProdutoRepositoryImpl(EntityManager entityManager) {
+        super(Produto.class, entityManager);
     }
 
     @Override

@@ -12,8 +12,8 @@ import com.projeto.repositories.CarrinhoRepository;
 @Repository
 public class CarrinhoRepositoryImpl extends SimpleJpaRepository<Carrinho, Long> implements CarrinhoRepository {
 
-    public CarrinhoRepositoryImpl(EntityManager em) {
-        super(Carrinho.class, em);
+    public CarrinhoRepositoryImpl(EntityManager entityManager) {
+        super(Carrinho.class, entityManager);
     }
 
 }
