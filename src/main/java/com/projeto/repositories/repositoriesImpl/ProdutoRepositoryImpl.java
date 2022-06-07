@@ -2,45 +2,36 @@ package com.projeto.repositories.repositoriesImpl;
 
 import com.projeto.models.Produto;
 import com.projeto.repositories.ProdutoRepository;
-
-import javax.persistence.EntityManager;
-
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityNotFoundException;
 
 @Repository
+@Transactional(readOnly = true)
 public class ProdutoRepositoryImpl extends SimpleJpaRepository<Produto, Long> implements ProdutoRepository {
 
-    private final ProdutoRepository produtoRepository;
-
-    public ProdutoRepositoryImpl(JpaEntityInformation<Produto, ?> entityInformation, EntityManager entityManager,
-            com.projeto.repositories.ProdutoRepository produtoRepository) {
-        super(entityInformation, entityManager);
-        this.produtoRepository = produtoRepository;
-    }
-
-    public ProdutoRepositoryImpl(Class<Produto> domainClass, EntityManager em,
-            com.projeto.repositories.ProdutoRepository produtoRepository) {
-        super(domainClass, em);
-        this.produtoRepository = produtoRepository;
+    public ProdutoRepositoryImpl(EntityManager em) {
+        super(Produto.class, em);
     }
 
     @Override
-    public void ProdutoRepository(String nome) {
-        // TODO Auto-generated method stub
-
+    public Produto findByNome(String nome) {
+        return super.findOne((root, query, builder) -> builder.equal(root.get("nome"), nome))
+                .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado"));
     }
 
     @Override
-    public String getByName(String nome) {
-        return produtoRepository.getByName(nome);
+    public Produto addProduto(Produto produto) {
+        return this.save(produto);
     }
 
-    public Page<Produto> findAll(Pageable pageable) {
-        return produtoRepository.findAll(pageable);
+    @Override
+    public Produto deleteAllById(Long id) {
+        return this.deleteAllById(id);
     }
+
 
 }

@@ -1,19 +1,16 @@
 package com.projeto.repositories;
 
 import com.projeto.models.Produto;
-
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.NoRepositoryBean;
 
-@Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+@NoRepositoryBean
+public interface ProdutoRepository extends JpaRepository<Produto, Long>, JpaSpecificationExecutor<Produto> {
 
-    public void ProdutoRepository(@PathVariable String nome);
+    Produto findByNome(String nome);
 
-    String getByName(String nome);
+    Produto addProduto(Produto produto);
 
-    public Page<Produto> findAll(Pageable pageable);
+    Produto deleteAllById(Long id);
 }

@@ -1,16 +1,19 @@
 package com.projeto.repositories.repositoriesImpl;
 
-import javax.transaction.Transactional;
+import javax.persistence.EntityManager;
 
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.projeto.models.Carrinho;
 import com.projeto.repositories.CarrinhoRepository;
 
-import lombok.RequiredArgsConstructor;
 
-@Transactional
 @Repository
-@RequiredArgsConstructor
-public abstract class CarrinhoRepositoryImpl implements CarrinhoRepository {
+public class CarrinhoRepositoryImpl extends SimpleJpaRepository<Carrinho, Long> implements CarrinhoRepository {
+
+    public CarrinhoRepositoryImpl(EntityManager em) {
+        super(Carrinho.class, em);
+    }
 
 }

@@ -4,9 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
-@Data
 @Entity
+@Data
+@RequiredArgsConstructor
 public class Produto {
 
     @Id
@@ -22,7 +24,7 @@ public class Produto {
     }
 
     public static Integer getQuantidade() {
-        return quantidade += 1;
+        return quantidade;
     }
 
 }

@@ -157,13 +157,15 @@
 					<artifactId>junit-platform-launcher</artifactId>
 					<scope>test</scope>
 				</dependency>
+				<dependency>
+					<groupId>org.hibernate</groupId>
+					<artifactId>hibernate-entitymanager</artifactId>
+				</dependency>
 			</dependencies>
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.graalvm.buildtools</groupId>
-						<artifactId>native-maven-plugin</artifactId>
-						<version>${native-buildtools.version}</version>
+						<artifactId/>
 						<extensions>true</extensions>
 						<executions>
 							<execution>
