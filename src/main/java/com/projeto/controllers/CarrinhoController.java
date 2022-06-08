@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/carrinho")
 @RequiredArgsConstructor
 public class CarrinhoController {
-    // private final CarrinhoRepositoryImpl carrinhoRepositoryImpl;
+
     private final CarrinhoService carrinhoService;
 
     @GetMapping("/produtos")
@@ -36,19 +36,19 @@ public class CarrinhoController {
         return carrinhoService.findById(id);
     }
 
-    @PutMapping("/adicionaProduto")
+    @PutMapping("/adicionaProdutos")
     public ResponseEntity<Produto> salvarProduto(@RequestBody Produto produto) {
         return carrinhoService.salvarProduto(produto);
     }
 
-    @PostMapping("/atualizaProduto")
+    @PostMapping("/atualizaProdutos")
     public ResponseEntity<Produto> updateProduto(@RequestBody Produto produto) {
         return carrinhoService.salvarProduto(produto);
     }
 
-    @DeleteMapping("/deleta/{id}")
+    @DeleteMapping("/deletaProdutos/{id}")
     public void deletaProduto(@PathVariable(value = "id") Long id) {
-       carrinhoService.deletaProdutoId(id);
+        carrinhoService.deletaProdutoId(id);
     }
 
 }

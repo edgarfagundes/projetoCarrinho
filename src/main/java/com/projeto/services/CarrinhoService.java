@@ -25,7 +25,7 @@ public class CarrinhoService {
             }
             return new ResponseEntity<>(produto, HttpStatus.OK);
         } catch (NullPointerException e) {
-            throw new Error(e.getCause());
+            throw new Error(e.getMessage());
         }
     }
 
@@ -53,7 +53,7 @@ public class CarrinhoService {
     public void deletaProdutoId(Long id) {
         try {
             produtoRepository.deleteAllById(id);
-        }catch(NullPointerException n){
+        } catch (NullPointerException n) {
             throw new Error(n.getMessage());
         }
     }
